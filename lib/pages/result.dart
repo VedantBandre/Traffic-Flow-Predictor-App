@@ -1,4 +1,5 @@
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Result extends StatefulWidget {
@@ -28,11 +29,14 @@ class _ResultState extends State<Result> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF62EED3),
+        centerTitle: true,
+        backgroundColor: Colors.indigoAccent,
         elevation: 20,
         leading: IconButton(onPressed: () {
           _navigatetohome();
-        }, icon: Icon(Icons.arrow_back_ios_new_rounded),),
+          },
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+        ),
         title: Text('Results'),
       ),
       body:
@@ -64,6 +68,9 @@ class _ResultState extends State<Result> {
                       elevation: 50,
                       shadowColor: Colors.grey,
                       borderOnForeground: false,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      ),
                       color: Color(0xFF62EED3),
                       child: Center(
                           child: Text("Tap To See Results", style: TextStyle(
@@ -77,6 +84,9 @@ class _ResultState extends State<Result> {
                     color: Color(0xFF62EED3),
                     elevation: 50,
                     shadowColor: Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    ),
                     child: Column(
                       children: [
                         SizedBox(
@@ -124,9 +134,7 @@ class _ResultState extends State<Result> {
                         ),
                       ],
                     ),
-
                   ),
-
                 ),
               ),
             )

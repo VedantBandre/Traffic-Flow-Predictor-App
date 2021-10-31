@@ -8,10 +8,6 @@ import 'package:trafficprediction2/pages/result.dart';
 
 
 void main(){
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle
-      .light//status bar theme
-    // ()
-  );
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -25,7 +21,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue
       ),
       home:SplashScreen1(),
-
       routes:   {//page changes
         '/a':(context)=>Home(),
         // '/b':(context)=>SplashScreen2(),

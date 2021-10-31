@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -26,6 +27,8 @@ class _HomeState extends State<Home> {
       meanSpeed = "", meanTime = "", label = "", hour = "", day = "", finalUrl = "";
   late String urlTime = "",  urlDate = "";
   late String urlStreet = "";
+
+  late String dispTime = "";
 
   Map mapResponse = <String, String>{};
 
@@ -72,6 +75,15 @@ class _HomeState extends State<Home> {
     "Tilak Rd and Firdausi Rd",
     "Tilak Rd/Tilak Bridge/Tilak Flyover",
   ];
+
+  displayTime(dispTime){
+    if(int.parse(dispTime) < 10) {
+      return "0" + "$dispTime";
+    }
+    else {
+      return dispTime;
+    }
+  }
 
 
   Future<void> fetchdata() async{
@@ -128,7 +140,12 @@ class _HomeState extends State<Home> {
     super.initState();
     setState(() {});
     time = TimeOfDay.now();
-
+    // if((time.toString() > "6:00") & (time.toString() < "18:00")) {
+    //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    // }
+    // else
+    //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    print(time);
   }
 
   Future<Null> selectTime (BuildContext context)async{
@@ -232,7 +249,7 @@ class _HomeState extends State<Home> {
                       children: [
                         Center(
                           child: Container(//time selection block
-                            height: 190,
+                            height: 200,
                             width: 170,
                             margin: EdgeInsets.only(right:15,left: 23, top: 420),
                             decoration: BoxDecoration(
@@ -245,7 +262,7 @@ class _HomeState extends State<Home> {
                                       offset: Offset(0 , 5)//change
                                   ),
                                 ],
-                                borderRadius: BorderRadius.all(Radius.circular(15))
+                                borderRadius: BorderRadius.all(Radius.circular(12))
                             ),
                             //crossAxisAlignment: CrossAxisAlignment.end,
                             child: Column(
@@ -260,25 +277,31 @@ class _HomeState extends State<Home> {
                                       ),
                                     )
                                 ),
-                                Container(//icon
-                                  padding: EdgeInsets.only(right: 25,top: 7),
-                                  child: IconButton(onPressed: () {
-                                    selectTime(context);
-                                    urlTime = '${time.hour}:${time.minute}';
-                                    print(urlTime);
-                                  },
-                                    icon: Icon(Icons.alarm , color: Colors.black,size: 60,),
+                                Center(
+                                  child: Container(//icon
+                                    padding: EdgeInsets.fromLTRB(0, 4, 45, 0),
+                                    child: Center(
+                                      child: IconButton(onPressed: () {
+                                        selectTime(context);
+                                        urlTime = '${time.hour}:${time.minute}';
+                                        print(urlTime);
+                                        },
+                                        icon: Icon(Icons.alarm , color: Colors.black,size: 80),
+                                      ),
+                                    ),
                                   ),
                                 ),//icon
-                                Container(//line 2
-                                    padding: EdgeInsets.only(top: 35),
-                                    child:
-                                    Text(
-                                      'Time: ${time.hour}:${time.minute}',
-                                      style: TextStyle(
-                                          fontSize: 20
-                                      ),
-                                    )
+                                Center(
+                                  child: Container(//line 2
+                                      padding: EdgeInsets.only(top: 50),
+                                      child:
+                                      Text(
+                                        displayTime(time.hour.toString()) + ":" + displayTime(time.minute.toString()),
+                                        style: TextStyle(
+                                            fontSize: 23
+                                        ),
+                                      )
+                                  ),
                                 ),
                               ],//children end
                             ),//searchbar1content ends
@@ -286,9 +309,9 @@ class _HomeState extends State<Home> {
                         ),
                         Center(//date selection block
                           child: Container(
-                            height: 190,
+                            height: 200,
                             width: 170,
-                            margin: EdgeInsets.only(right:15,left: 15, top: 420),
+                            margin: EdgeInsets.only(right:15, left: 15, top: 420),
                             decoration: BoxDecoration(
                                 color: Colors.white,//change
                                 boxShadow: [
@@ -299,7 +322,7 @@ class _HomeState extends State<Home> {
                                       offset: Offset(0 , 5)//change
                                   ),
                                 ],
-                                borderRadius: BorderRadius.all(Radius.circular(15))
+                                borderRadius: BorderRadius.all(Radius.circular(12))
                             ),
                             child: Column(
                               children: [
@@ -313,9 +336,8 @@ class _HomeState extends State<Home> {
                                       ),
                                     )
                                 ),
-
                                 Container(//icon
-                                  padding: EdgeInsets.only(right: 15,top:10),
+                                  padding: EdgeInsets.only(right: 50, top: 4),
                                   child: IconButton(onPressed: () {
                                     selectTimePicker(context);
                                     print(date);
@@ -323,35 +345,41 @@ class _HomeState extends State<Home> {
                                     urlDate = ud.replaceAll('-', ' ');
                                     // Use this dateString parameter in the backend
                                     print(urlDate);
-                                  },
+                                    },
                                     icon: Icon(Icons.calendar_today_rounded ,
                                       color: Colors.black,
-                                      size: 50,),
+                                      size: 78),
                                   ),
                                 ),//icon
                                 Container(//line 2
-                                    padding: EdgeInsets.only(left: 50, top:35),
+                                    padding: EdgeInsets.only(left: 25, top: 51),
                                     child:
                                     Row(
                                       children: [
                                         Text(
                                           date.day.toString(),
                                           style: TextStyle(
-                                              fontSize: 18
+                                              fontSize: 23
                                           ),
                                         ),
-                                        Text('/'),
+                                        Text('/', style: TextStyle(
+                                            fontSize: 23
+                                        ),
+                                        ),
                                         Text(
                                           date.month.toString(),
                                           style: TextStyle(
-                                              fontSize: 18
+                                              fontSize: 23
                                           ),
                                         ),
-                                        Text('/'),
+                                        Text('/', style: TextStyle(
+                                            fontSize: 23
+                                        ),
+                                        ),
                                         Text(
                                           date.year.toString(),
                                           style: TextStyle(
-                                              fontSize: 18
+                                              fontSize: 23
                                           ),
                                         ),],
                                     )
@@ -380,14 +408,18 @@ class _HomeState extends State<Home> {
                       ),
                       height: 60,
                       width: 120,
-                      margin: EdgeInsets.only(right:15,left: 15, top: 75),
+                      margin: EdgeInsets.only(right:15,left: 15, top: 40),
                       child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all (Colors.indigoAccent),
+                        ),
                           onPressed: () async{
                             await fetchdata();
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>
                             new Result(congestion: congestion, meandistance: meanDistance,
-                                meanspeed: meanSpeed, meantime: meanTime))
-                            );
+                                meanspeed: meanSpeed, meantime: meanTime
+                            )
+                            ));
                             print('$congestion, $meanDistance, $meanSpeed, $meanTime');
                             // _navigatetohome();
                           },
@@ -398,11 +430,9 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
-
             ),
           ),
         )
       );
-
   }
 }
