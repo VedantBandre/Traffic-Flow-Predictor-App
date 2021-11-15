@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/map2.png'),
+                image: AssetImage('assets/images/daymap.png'),
                 fit: BoxFit.cover,
               )
           ),
