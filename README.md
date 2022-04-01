@@ -1,4 +1,4 @@
-# Traffic-FLow-Predictor-App
+# Traffic-Flow-Predictor-App
 
 A Flutter app which uses the Traffic Flow Predictor Model to predict:
   1. The Flow of traffic i.e the Congestion along your route
