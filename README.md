@@ -6,4 +6,4 @@ A Flutter app which uses the Traffic Flow Predictor Model to predict:
   3. The Estimated Time to arrive
   4. The Average Speed of your commute
 
-The app was created with optimizing the routes from Dadar & Wadala Stations to Vidyalankar Institute of Technology, Wadala.
+The app was created with optimizing the travel routes of students, professors & staff members from Dadar & Wadala Railway Stations to Vidyalankar Institute of Technology, Wadala.
