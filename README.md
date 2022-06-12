@@ -7,3 +7,5 @@ A Flutter app which uses the Traffic Flow Predictor Model to predict:
   4. The Average Speed of your commute
 
 The app was created with optimizing the travel routes of students, professors & staff members from Dadar & Wadala Railway Stations to Vidyalankar Institute of Technology, Wadala.
+
+The whole Traffic Flow Predictor Project, with the ML Model, API and Flask App is in the repo https://github.com/VedantBandre/Traffic-Flow-Predictor-Project.git.
